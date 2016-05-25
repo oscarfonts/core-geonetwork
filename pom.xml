@@ -1132,6 +1132,7 @@
       </activation>
       <modules>
         <module>schemas-test</module>
+        <module>custom-web-ui</module>
         <module>web-ui</module>
         <module>web-ui-docs</module>
         <module>web</module>
