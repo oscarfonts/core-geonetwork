@@ -1,11 +1,11 @@
 (function() {
 
-  goog.provide('gn_search_default_config');
+  goog.provide('gn_search_custom_config');
 
-  var module = angular.module('gn_search_default_config', []);
+  var module = angular.module('gn_search_custom_config', []);
 
   module.value('gnTplResultlistLinksbtn',
-      '../../catalog/views/default/directives/partials/linksbtn.html');
+      '../../catalog/views/custom/directives/partials/linksbtn.html');
 
   module
       .run([
