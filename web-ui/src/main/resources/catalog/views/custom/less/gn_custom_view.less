@@ -1,3 +1,158 @@
 /* Defined here any custom style for the view
    which has to be applied for all apps
    (ie. admin, search, login, editor). */
+
+body {
+	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
+	background-color: #F5F5F5;
+}
+
+h1, h2 {
+	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
+}
+h3, h4 {
+	font-family: 'OpenSansSemibold', Helvetica, Arial, sans-serif;
+	font-weight: normal;
+}
+
+.navbar {
+	background: #333;
+	color: #fff;
+	border: 0;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #fff;
+    border-left: 1px solid #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #333;
+    background-color: #777;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #333;
+    background-color: #fff;
+}
+
+.navbar-form {
+    right: 20px;
+}
+
+.gn-top-bar {
+	height: 123px;
+	border-bottom: 3px solid #fff;
+}
+
+.navbar-nav > li > a {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    height: 36px;
+    padding: 7px 15px;
+    top: 84px;
+}
+
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+}
+
+a {
+    color: #c00000;
+    text-decoration: none;
+}
+
+.gn-row-main .well {
+    display: none;
+}
+
+.btn-primary,
+.btn-primary:hover
+ {
+    background-color: #C00000;
+    border: 1px solid #c00000;
+    border-radius: 0;
+}
+
+.gn-bottom-bar {
+	height: 50px;
+	background-color: #F5F5F5;
+	border-top: 2px solid #cccccc;
+}
+
+.gn-bottom-bar > .navbar-nav > li > a {
+	height: 50px;
+	padding: 15px;
+	top: auto;
+	border: none;
+	color: #cccccc;
+}
+
+.gn-bottom-bar > .navbar-nav > li > a:hover {
+	background-color: #cccccc;
+}
+
+.nav-tabs {
+	font-weight: bold;
+}
+
+.tab-content > .active {
+    background: #fff;
+    padding: 0px;
+    border: 1px solid #ddd;
+    border-top-width: 0;
+}
+
+.quickresultcard .front {
+    width: ~"calc(33.33% - 32px)";
+    border-radius: 0;
+}
+
+.gn-info-list {
+	margin:0;
+	padding:0;
+}
+
+.gn-search-facet {
+    background-color: white;
+    border: 1px solid #e7e7e7;
+}
+
+.gn-row-main h1,
+.nav-tabs > li > a:hover,
+.btn-link,
+.btn-link:hover,
+.btn-link:focus,
+.gn-sort-by .btn-group > button,
+.gn-sort-by .btn-group > button:hover,
+.gn-sort-by .btn-group > button:focus,
+.gn-pager .btn-group button,
+.gn-pager .btn-group button:hover,
+.gn-pager .btn-group button:focus,
+.gn-facet .list-group-item:hover,
+ul.gn-resultview li.gn-grid .gn-md-title h3 a:hover,
+.gn-metadata-view h3 {
+	color: #C00000;
+}
+
+.quickresultcard,
+.btn,
+ul.gn-resultview li.list-group-item,
+.nav-tabs > li > a,
+.form-control,
+.gn-pager .pager li > a,
+[data-gn-map-field] > [ngeo-map] {
+	border-radius: 0px;
+}
+
+.form-control:focus {
+    border-color: #C00000;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(192, 0, 0, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(192, 0, 0, 0.6);
+}
