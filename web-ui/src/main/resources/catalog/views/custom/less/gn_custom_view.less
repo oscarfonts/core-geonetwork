@@ -2,20 +2,34 @@
    which has to be applied for all apps
    (ie. admin, search, login, editor). */
 
+/* @import (less) "open_sans_fonts.css"; */
+
+html, body {
+    font-family: "Open Sans" , Helvetica, Arial, sans-serif, Helvetica,  Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
 body {
-	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
+	font-family: "Open Sans" , Helvetica, Arial, sans-serif, Helvetica,  Arial, sans-serif;
 	background-color: #F5F5F5;
 }
 
-h1, h2 {
-	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
-}
-h3, h4 {
-	font-family: 'OpenSansSemibold', Helvetica, Arial, sans-serif;
-	font-weight: normal;
+h1, h2, h3, h4, h5, h6, h7, h8, h9, h10 {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: 700;
+    font-family: "Open Sans",Helvetica,Arial,sans-serif !important;
 }
 
-.navbar {
+.gn-row-main h1 {
+    font-weight: 600;
+    font-size: 2em;
+}
+
+.navbar,
+.navbar-collapse {
 	background: #333;
 	color: #fff;
 	border: 0;
@@ -39,22 +53,29 @@ h3, h4 {
     background-color: #fff;
 }
 
-.navbar-form {
-    right: 20px;
-}
+@media (min-width: 768px) {
+  /* Uncollapsed navbar */
 
-.gn-top-bar {
-	height: 123px;
-	border-bottom: 3px solid #fff;
+  .navbar-form {
+    right: 20px;
+  }
+
+  .gn-top-bar {
+    height: 123px;
+    border-bottom: 3px solid #fff;
+  }
+
+  .navbar-nav > li > a {
+    height: 36px;
+    padding: 7px 15px;
+    top: 84px;
+  }
 }
 
 .navbar-nav > li > a {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-weight: 600;
     font-size: 16px;
-    height: 36px;
-    padding: 7px 15px;
-    top: 84px;
 }
 
 .navbar-default .navbar-nav>li>a,
@@ -155,4 +176,117 @@ ul.gn-resultview li.list-group-item,
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(192, 0, 0, 0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(192, 0, 0, 0.6);
+}
+
+.xarxes,
+.xarxes:hover,
+.xarxes:focus {
+    color: #fff;
+    border-radius: 31px;
+    height: 31px;
+    width: 31px;
+    font-size: 19px;
+    padding: 3px;
+}
+
+.googleplus,
+.googleplus:hover,
+.googleplus:focus {
+    background-color: #DD4B39;    
+    border-color: #DD4B39;
+}
+
+.twitter,
+.twitter:hover,
+.twitter:focus {
+    background-color: #1B95E0;    
+    border-color: #1B95E0;   
+}
+
+.facebook,
+.facebook:hover,
+.facebook:focus {
+    background-color: #3B5998;    
+    border-color: #3B5998;   
+}
+
+.metadata-rate > span {
+    color: #C00000;
+}
+
+.logos .logo {
+    z-index: 1;
+    position: absolute;
+    display: block;
+    top: 10px;
+}
+
+.logos .gencat {
+    left: 50px;
+}
+
+.logos .icgc {
+    left: 233px;
+}
+
+@media (max-width: 768px) {
+  /* Collapsed navbar */
+
+  .logos .gencat {
+    left: 30px;
+  }
+
+  .logos .icgc {
+    top: 5px;
+    left: 213px;
+  }
+
+  .logos .icgc > img {
+    height: 40px;
+  }
+
+  .navbar-form {
+    height: 34px;
+    border: 1px solid #333;
+    border-left: 1px solid #fff;
+    padding: 0;
+    margin: -8px -15px;
+  }
+
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+    border-left: 1px solid #fff;
+  }
+
+  .gn-top-bar .visible-lg {
+    display: inline !important;
+  }
+
+  .navbar-default .navbar-toggle,
+  .navbar-default .navbar-toggle:hover,
+  .navbar-default .navbar-toggle:focus {
+    border-radius: 0;
+    background-color: #555;
+    border: none;
+  }
+
+  .navbar-default .navbar-toggle .icon-bar {
+     background-color: #fff;
+  }
+  .navbar-default .navbar-toggle.collapsed {
+    background-color: #333;
+  }
+
+}
+
+@media (max-width: 400px) {
+  /* Collapsed navbar */
+
+  .logos .gencat {
+    display: none;
+  }
+
+  .logos .icgc {
+    left: 30px;
+  }
 }
