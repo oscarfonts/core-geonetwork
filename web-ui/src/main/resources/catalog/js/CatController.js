@@ -45,12 +45,9 @@
       $scope.lang = tokens[5];
       $scope.nodeId = tokens[4];
       // TODO : get list from server side
-      $scope.langs = {'eng': 'en', 'dut': 'du', 'fre': 'fr',
-        'ger': 'de', 'kor': 'ko', 'spa': 'es', 'cat': 'ca', 'cze': 'cz'};
+      $scope.langs = {'eng': 'en', 'spa': 'es', 'cat': 'ca'};
       // Lang names to be displayed in language selector
-      $scope.langLabels = {'eng': 'English', 'dut': 'Nederlands',
-        'fre': 'Français', 'ger': 'Deutsch', 'kor': '한국의',
-        'spa': 'Español', 'cat': 'Català', 'cze': 'Czech'};
+      $scope.langLabels = {'eng': 'English', 'spa': 'Español', 'cat': 'Català'};
       $scope.url = '';
       $scope.base = '../../catalog/';
       $scope.proxyUrl = gnGlobalSettings.proxyUrl;
