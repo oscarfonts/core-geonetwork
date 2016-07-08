@@ -358,5 +358,6 @@
     "fbCatMetadataEditing": "Edición de metadatos",
     "fbCatHarvesting": "Harvesting",
     "fbCatValidator": "Validador",
-    "fbCatOthers": "Otros"
+    "fbCatOthers": "Otros",
+    "rccState": "Estado RCC"
 }

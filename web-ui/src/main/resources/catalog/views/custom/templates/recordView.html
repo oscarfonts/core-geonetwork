@@ -124,6 +124,12 @@
                 </div>
               </td>
             </tr>
+            <tr data-ng-if="mdView.current.record.rccState">
+              <th data-translate="">rccState</th>
+              <td>
+                <p>{{mdView.current.record.rccState}}</p>
+              </td>
+            </tr>
             <tr data-ng-if="mdView.current.record.category.length > 0 ||
                       mdView.current.record.topicCat.length > 0">
               <th data-translate="">listOfCategories</th>

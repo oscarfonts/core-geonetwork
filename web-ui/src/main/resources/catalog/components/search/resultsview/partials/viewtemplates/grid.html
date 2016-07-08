@@ -80,6 +80,7 @@
 
           <div class="text-justify gn-md-abstract ellipsis">
             <div>
+              <p data-ng-if="md.rccState"><span data-translate="">rccState</span>: {{md.rccState}}</p>
               <p>{{(md.abstract || md.defaultAbstract) | striptags}}</p>
             </div>
           </div>
