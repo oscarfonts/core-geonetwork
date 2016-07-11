@@ -308,5 +308,6 @@
   "wpsExecute": "Execute",
   "wpsExecuteFailed": "Execute failed",
   "wpsErrorCodeReturned": "The serveur returned status code",
-  "rccState": "RCC Status"
+  "rccState": "RCC Status",
+  "idecImatgesAndHistorics": "IDEC Images/Historical"
 }

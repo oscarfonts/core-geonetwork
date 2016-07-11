@@ -139,4 +139,13 @@
     <constructor-arg name="langCode" value="eng"/>
   </bean>
   -->
+	<bean id="imatgesHistoricsClassifier" class="org.fao.geonet.kernel.search.classifier.KnownValues"
+		lazy-init="true">
+		<constructor-arg name="values">
+			<list>
+				<value>Imatge</value>
+				<value>IDEC.CARTOTECA</value>
+			</list>
+		</constructor-arg>
+	</bean>
 </beans>

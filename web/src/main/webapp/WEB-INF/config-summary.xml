@@ -101,6 +101,8 @@
 
         <facet name="maintenanceAndUpdateFrequency" indexKey="cl_maintenanceAndUpdateFrequency"
                label="maintenanceAndUpdateFrequencies"/>
+		<facet name="imatgesAndHistorics" label="idecImatgesAndHistorics" indexKey="keyword"
+			classifier="imatgesHistoricsClassifier" />
       </facets>
 
       <summaryTypes>
@@ -121,6 +123,7 @@
           <item facet="serviceType"/>
           <item facet="denominator" sortBy="numValue" sortOrder="desc"/>
           <item facet="resolution" sortBy="numValue" sortOrder="desc"/>
+          <item facet="imatgesAndHistorics" translator="codelist:idec:imatgesHistoricsCode" />
           <!--
           <item facet="region"
                 translator="term:http://geonetwork-opensource.org/thesaurus/naturalearth-and-seavox"/>
