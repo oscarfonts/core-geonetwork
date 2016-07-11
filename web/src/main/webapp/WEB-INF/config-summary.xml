@@ -123,6 +123,7 @@
           <item facet="serviceType"/>
           <item facet="denominator" sortBy="numValue" sortOrder="desc"/>
           <item facet="resolution" sortBy="numValue" sortOrder="desc"/>
+          <item facet="rccState" translator="codelist:idec:rccStateCode"/>
           <item facet="imatgesAndHistorics" translator="codelist:idec:imatgesHistoricsCode" />
           <!--
           <item facet="region"
