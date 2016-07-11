@@ -73,7 +73,7 @@
     "securityConstraints": "Restricciones de seguridad",
     "otherConstraints": "Otras restricciones",
     "resourceConstraints": "Restricciones de recursos",
-    "maintenanceAndUpdateFrequencies": "Actualizar frecuencias",
+    "maintenanceAndUpdateFrequencies": "Frecuencia de actualización",
     "legalConstraints": "Restricciones legales",
     "scale": "Escala",
     "resolution": "Resolución",
