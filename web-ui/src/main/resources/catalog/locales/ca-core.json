@@ -59,7 +59,7 @@
     "associatedResources": "Recursos associats",
     "comments": "Comentari",
     "country": "País",
-    "validateSelectedRecordConfirm": "Estàs segur de voler esborrar les {{selectedCount}} entrades seleccionades?",
+    "validateSelectedRecordConfirm": "Estàs segur de voler validar les {{selectedCount}} entrades seleccionades?",
     "regions": "Regions",
     "gemetKeywords": "Paraules Clau GEMET",
     "createAnAccount": "Crea un compte",
