@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<i18n>
+  <viewInGE>Veure a Google Earth</viewInGE>
+  <warning>Alerta!</warning>
+  <addA>Afegir </addA>
+  <nojs>Javascript no habilitat. Habiliteu-lo o aneu <a
+    href="catalog.search.nojs">aqui</a> per al mode degradat de cerca.</nojs>
+  <selectView>Escollir vista</selectView>
+  <moreTabs>Més informació</moreTabs>
+  <nodeChangeWarning>Alerta per Canvi de Node</nodeChangeWarning>
+  <nodeChangeInfo>Alerta: Ja no esteu al node original.</nodeChangeInfo>
+  <nodeChangeBack>Si voleu tornar al node on us vàreu autenticar, feu clic:</nodeChangeBack>
+  <nodeChangeForward>Si voleu sortir i tornar a la url anterior, feu clic:</nodeChangeForward>
+  <serviceNotAllowedTitle>Servei no disponible</serviceNotAllowedTitle>
+  <serviceNotAllowed>El servei {1} no existeix o no teniu permís per accedir-hi.</serviceNotAllowed>
+  <linkToHome><span>Torna a la <a href="../..">pàgina de cerca</a>.</span></linkToHome>
+</i18n>
