@@ -72,3 +72,4 @@ datadir_*
 web/src/main/webapp/WEB-INF/data/harvester_*
 web/src/main/webapp/WEB-INF/data/wro4j-cache.h2.db
 web/src/main/webapp/WEB-INF/data/wro4j-cache.trace.db
+web/src/main/webapp/WEB-INF/data/wro4j-cache.lock.db
