@@ -45,9 +45,9 @@
       $scope.lang = tokens[5];
       $scope.nodeId = tokens[4];
       // TODO : get list from server side
-      $scope.langs = {'eng': 'en', 'spa': 'es', 'cat': 'ca'};
+      $scope.langs = {'cat': 'ca', 'spa': 'es', 'eng': 'en'};
       // Lang names to be displayed in language selector
-      $scope.langLabels = {'eng': 'English', 'spa': 'Español', 'cat': 'Català'};
+      $scope.langLabels = {'cat': 'Català', 'spa': 'Español', 'eng': 'English'};
       $scope.url = '';
       $scope.base = '../../catalog/';
       $scope.proxyUrl = gnGlobalSettings.proxyUrl;
@@ -118,7 +118,7 @@
         // Retrieve site information
         // TODO: Add INSPIRE, harvester, ... information
         var catInfo = promiseStart.then(function(value) {
-          var url = $scope.url + 'info?_content_type=json&type=site&type=auth';
+          var url = $scope.url + 'info?_content_type=json&type=site&type=auth&type=config';
           return $http.get(url).
               success(function(data, status) {
                 $scope.info = data;
@@ -224,6 +224,10 @@
       $scope.clearStatusMessage = function() {
         $scope.status = null;
         $('.gn-info').hide();
+      };
+
+      $scope.allowPublishInvalidMd = function() {
+        return gnConfig['metadata.workflow.allowPublishInvalidMd'];
       };
 
       $scope.$on('StatusUpdated', function(event, status) {
