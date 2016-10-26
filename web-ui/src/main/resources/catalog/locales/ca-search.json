@@ -365,5 +365,7 @@
     "mdvalid": "La metadada és vàlida",
     "mdinvalid": "La metadada no és vàlida",
     "mdinvalidcantpublish": "Les metadades invàlides no es poden publicar",
-    "mdnovalidation": "La metadada no té informació de validació"
+    "mdnovalidation": "La metadada no té informació de validació",
+    "rccState": "Estat RCC",
+    "idecImatgesAndHistorics": "IDEC Imatges/Històrics"
 }

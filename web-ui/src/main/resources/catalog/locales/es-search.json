@@ -365,5 +365,7 @@
     "mdvalid": "Los metadatos son válidos",
     "mdinvalid": "Los metadatos no son válidos",
     "mdinvalidcantpublish": "Los metadatos no válidos no pueden ser publicados",
-    "mdnovalidation": "Los metadatos no tienen información de validación"
+    "mdnovalidation": "Los metadatos no tienen información de validación",
+    "rccState": "Estado RCC",
+    "idecImatgesAndHistorics": "IDEC Imágenes/Históricos"
 }
