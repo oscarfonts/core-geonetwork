@@ -17,3 +17,6 @@
 [submodule "docs/manuals"]
 	path = docs/manuals
 	url = https://github.com/geonetwork/doc.git
+[submodule "schemas/idec"]
+	path = schemas/idec
+	url = git@github.com:oscarfonts/idec-geonetwork.git
