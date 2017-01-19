@@ -37,6 +37,11 @@
       select="count($metadata/gmd:identificationInfo/srv:SV_ServiceIdentification) > 0"/>
   </xsl:template>
 
+  <xsl:template name="get-iso19139-title">
+    <xsl:value-of select="$metadata/gmd:identificationInfo/*/gmd:citation/*/gmd:title/gco:CharacterString"/>
+  </xsl:template>
+
+
   <xsl:template name="get-iso19139-extents-as-json">[
     <xsl:for-each select="//gmd:geographicElement/gmd:EX_GeographicBoundingBox[
             number(gmd:westBoundLongitude/gco:Decimal)
@@ -80,8 +85,8 @@
               <xsl:value-of select="gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType|
-                gmd:CI_OnlineResource/gmd:name/gco:CharacterString"/>
+              <xsl:value-of select="substring-after(
+              gmd:CI_OnlineResource/gmd:linkage/gmd:URL, 'attachments/')"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>

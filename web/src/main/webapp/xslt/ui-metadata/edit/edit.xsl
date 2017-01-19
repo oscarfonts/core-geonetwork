@@ -21,7 +21,6 @@
   ~ Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
-
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:saxon="http://saxon.sf.net/"
                 xmlns:gn="http://www.fao.org/geonetwork" xmlns:java-xsl-util="java:org.fao.geonet.util.XslUtil"
                 version="2.0"
@@ -80,6 +79,7 @@
       <input type="hidden" id="isService" name="type" value="{$isService}"/>
       <input type="hidden" id="uuid" value="{$metadataUuid}"/>
       <input type="hidden" name="id" value="{$metadataId}"/>
+      <input type="hidden" id="title" value="{$metadataTitle}"/>
       <input type="hidden" id="language" value="{$metadataLanguage}"/>
       <input type="hidden" id="otherLanguages" value="{$metadataOtherLanguagesAsJson}"/>
       <input type="hidden" id="version" name="version" value="{$metadata/gn:info/version}"/>
@@ -108,7 +108,6 @@
         <xsl:with-param name="pattern" select="$layerMatchingPattern"/>
         <xsl:with-param name="id" select="'layerConfig'"/>
       </xsl:call-template>
-
 
       <!-- Dispatch to profile mode -->
       <xsl:if test="$service != 'md.element.add'">

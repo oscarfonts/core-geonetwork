@@ -57,15 +57,16 @@
    * TODO: This could be used in other places
    * probably. Move to another common or language module ?
    */
-  module.directive('gnCountryPicker', ['gnHttp', 'gnUtilityService',
-    function(gnHttp, gnUtilityService) {
+  module.directive('gnCountryPicker', ['$http',
+    function($http) {
       return {
         restrict: 'A',
         link: function(scope, element, attrs) {
           element.attr('placeholder', '...');
-          gnHttp.callService('country', {}, {
-            cache: true
-          }).success(function(response) {
+          $http.get('../api/regions?categoryId=' +
+              'http://geonetwork-opensource.org/regions%23country', {}, {
+                cache: true
+              }).success(function(response) {
             var data = response.region;
 
             // Compute default name and add a
@@ -112,10 +113,19 @@
         link: function(scope, element, attrs) {
           scope.gnRegionService = gnRegionService;
 
+          var addGeonames = !attrs['disableGeonames'];
+
           /**
           * Load list on init to fill the dropdown
           */
           gnRegionService.loadList().then(function(data) {
+            scope.regionTypes = data;
+            if (addGeonames) {
+              scope.regionTypes.unshift({
+                name: 'Geonames',
+                id: 'geonames'
+              });
+            }
             scope.regionType = data[0];
           });
 
@@ -160,8 +170,8 @@
    * to catch event from selection.
    */
   module.directive('gnRegionPickerInput', [
-    'gnRegionService',
-    function(gnRegionService) {
+    'gnRegionService', 'gnUrlUtils',
+    function(gnRegionService, gnUrlUtils) {
       return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -177,30 +187,95 @@
           }
           scope.$watch('regionType', function(val) {
             if (scope.regionType) {
-              gnRegionService.loadRegion(scope.regionType, scope.lang).then(
-                  function(data) {
-                    $(element).typeahead('destroy');
-                    var source = new Bloodhound({
-                      datumTokenizer:
-                          Bloodhound.tokenizers.obj.whitespace('name'),
-                      queryTokenizer: Bloodhound.tokenizers.whitespace,
-                      local: data,
-                      limit: 30
-                    });
-                    source.initialize();
-                    $(element).typeahead({
-                      minLength: 0,
-                      highlight: true
-                    }, {
-                      name: 'countries',
-                      displayKey: 'name',
-                      source: source.ttAdapter()
-                    }).on('typeahead:selected', function(event, datum) {
-                      if (angular.isFunction(scope.onRegionSelect)) {
-                        scope.onRegionSelect(datum);
+
+              if (scope.regionType.id == 'geonames') {
+                $(element).typeahead('destroy');
+                var url = 'http://api.geonames.org/searchJSON';
+                url = gnUrlUtils.append(url, gnUrlUtils.toKeyValue({
+                  lang: scope.lang,
+                  style: 'full',
+                  type: 'json',
+                  maxRows: 10,
+                  name_startsWith: 'QUERY',
+                  username: 'georchestra'
+                }));
+
+                var autocompleter = new Bloodhound({
+                  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                  queryTokenizer: Bloodhound.tokenizers.whitespace,
+                  limit: 30,
+                  remote: {
+                    wildcard: 'QUERY',
+                    url: url,
+                    ajax: {
+                      beforeSend: function() {
+                        scope.regionLoading = true;
+                        scope.$apply();
+                      },
+                      complete: function() {
+                        scope.regionLoading = false;
+                        scope.$apply();
+                      }
+                    },
+                    filter: function(data) {
+                      return data.geonames;
+                    }
+                  }
+                });
+                autocompleter.initialize();
+                $(element).typeahead({
+                  minLength: 1,
+                  highlight: true
+                }, {
+                  name: 'places',
+                  displayKey: 'name',
+                  source: autocompleter.ttAdapter(),
+                  templates: {
+                    suggestion: function(loc) {
+                      var props = [];
+                      ['adminName1', 'countryName'].
+                          forEach(function(p) {
+                            if (loc[p]) { props.push(loc[p]); }
+                          });
+                      return loc.name + ((props.length == 0) ? '' :
+                          ' — <em>' + props.join(', ') + '</em>');
+                    }
+                  }
+
+                }).on('typeahead:selected', function(event, datum) {
+                  if (angular.isFunction(scope.onRegionSelect)) {
+                    scope.onRegionSelect(datum);
+                  }
+                });
+              }
+              else {
+                gnRegionService.loadRegion(scope.regionType, scope.lang).then(
+                    function(data) {
+                      if (data) {
+                        $(element).typeahead('destroy');
+                        var source = new Bloodhound({
+                          datumTokenizer:
+                              Bloodhound.tokenizers.obj.whitespace('name'),
+                          queryTokenizer: Bloodhound.tokenizers.whitespace,
+                          local: data,
+                          limit: 30
+                        });
+                        source.initialize();
+                        $(element).typeahead({
+                          minLength: 0,
+                          highlight: true
+                        }, {
+                          name: 'countries',
+                          displayKey: 'name',
+                          source: source.ttAdapter()
+                        }).on('typeahead:selected', function(event, datum) {
+                          if (angular.isFunction(scope.onRegionSelect)) {
+                            scope.onRegionSelect(datum);
+                          }
+                        });
                       }
                     });
-                  });
+              }
             }
           });
         }
@@ -221,13 +296,13 @@
    * like admin > harvesting > OGC WxS
    * probably. Move to another common or language module ?
    */
-  module.directive('gnLanguagePicker', ['gnHttp',
-    function(gnHttp) {
+  module.directive('gnLanguagePicker', ['$http',
+    function($http) {
       return {
         restrict: 'A',
         link: function(scope, element, attrs) {
           element.attr('placeholder', '...');
-          gnHttp.callService('lang', {}, {
+          $http.get('../api/isolanguages', {}, {
             cache: true
           }).success(function(data) {
             // Compute default name and add a
@@ -391,7 +466,7 @@
       return {
         restrict: 'A',
         template: '<button title="{{\'gnToggle\' | translate}}">' +
-            '<i class="fa fa-fw fa-angle-double-left"/>&nbsp;' +
+            '<i class="fa fa-fw fa-angle-double-up"/>&nbsp;' +
             '</button>',
         link: function linkFn(scope, element, attr) {
           var selector = attr['gnSectionToggle'] ||
@@ -401,6 +476,8 @@
             $(selector).each(function(idx, elem) {
               $(elem).trigger(event);
             });
+            $(this).find('i').toggleClass(
+                'fa-angle-double-up fa-angle-double-down');
           });
         }
       };
@@ -646,6 +723,12 @@
   module.directive('gnBootstrapDatepicker', [
     function() {
 
+      // to MM-dd-yyyy
+      var formatDate = function(day, month, year) {
+        return ('0' + day).slice(-2) + '-' +
+            ('0' + month).slice(-2) + '-' + year;
+      };
+
       var getMaxInProp = function(obj) {
         var year = {
           min: 3000,
@@ -661,27 +744,35 @@
         };
 
         for (var k in obj) {
+          k = parseInt(k);
           if (k < year.min) year.min = k;
           if (k > year.max) year.max = k;
         }
         for (k in obj[year.min]) {
+          k = parseInt(k);
           if (k < month.min) month.min = k;
         }
         for (k in obj[year.max]) {
+          k = parseInt(k);
           if (k > month.max) month.max = k;
         }
         for (k in obj[year.min][month.min]) {
-          if (obj[year.min][month.min][k] < day.min) day.min =
-                obj[year.min][month.min][k];
+          k = parseInt(k);
+          if (obj[year.min][month.min][k] < day.min) {
+            day.min = obj[year.min][month.min][k];
+          }
         }
         for (k in obj[year.max][month.max]) {
-          if (obj[year.min][month.min][k] > day.max) day.max =
-                obj[year.min][month.min][k];
+          k = parseInt(k);
+
+          if (obj[year.min][month.min][k] > day.max) {
+            day.max = obj[year.min][month.min][k];
+          }
         }
 
         return {
-          min: month.min + 1 + '/' + day.min + '/' + year.min,
-          max: month.max + 1 + '/' + day.max + '/' + year.max
+          min: formatDate(day.min, month.min + 1, year.min),
+          max: formatDate(day.max, month.max + 1, year.max)
         };
       };
 
@@ -983,7 +1074,13 @@
           return ioFn(input, 'parse');
         }
         function out(input) {
-          return ioFn(input, 'stringify');
+          // If model value is a string
+          // No need to stringify it.
+          if (attr['gnJsonIsJson']) {
+            return ioFn(input, 'stringify');
+          } else {
+            return input;
+          }
         }
         function ioFn(input, method) {
           var json;
@@ -1100,4 +1197,40 @@
       }
     };
   }]);
+
+  /**
+   * @ngdoc directive
+   * @name gn_utility.directive:gnLynky
+   *
+   * @description
+   * If the text provided contains the following format:
+   * link|URL|Text, it's converted to an hyperlink, otherwise
+   * the text is displayed without any formatting.
+   *
+   */
+  module.directive('gnLynky', ['$compile',
+    function($compile) {
+      return {
+        restrict: 'A',
+        scope: {
+          text: '@gnLynky'
+        },
+        link: function(scope, element, attrs) {
+          if (scope.text.startsWith('link') &&
+              scope.text.split('|').length == 3) {
+            scope.link = scope.text.split('|')[1];
+            scope.value = scope.text.split('|')[2];
+
+            element.replaceWith($compile('<a data-ng-href="{{link}}" ' +
+                'data-ng-bind-html="value"></a>')(scope));
+          } else {
+
+            element.replaceWith($compile('<span ' +
+                'data-ng-bind-html="text"></span>')(scope));
+          }
+        }
+
+      };
+    }
+  ]);
 })();

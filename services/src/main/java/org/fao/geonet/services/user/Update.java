@@ -32,6 +32,7 @@ import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.*;
 import org.fao.geonet.domain.responses.OkResponse;
+import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.UserRepository;
@@ -60,6 +61,7 @@ import static org.fao.geonet.repository.specification.UserGroupSpecs.hasUserId;
 
 @Controller("admin.user.update")
 @ReadWriteController
+@Deprecated
 public class Update {
 
 
@@ -67,6 +69,7 @@ public class Update {
         MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public
     @ResponseBody
+    @Deprecated
     OkResponse resetPassword(
         HttpSession session,
         @RequestParam(value = Params.ID) String id,
@@ -150,6 +153,25 @@ public class Update {
         UserGroupRepository userGroupRepository = ApplicationContextHolder.get().getBean(UserGroupRepository.class);
 
         checkAccessRights(operation, id, username, myProfile, myUserId, groups, userGroupRepository);
+
+        //If it is a useradmin updating,
+        //maybe we don't know all the groups the user is part of
+        if(!myProfile.equals(Profile.Administrator) && !Params.Operation.NEWUSER.equalsIgnoreCase(operation)) {
+            List<Integer> myUserAdminGroups = userGroupRepository.findGroupIds(Specifications.where(
+                    hasProfile(myProfile)).and(hasUserId(Integer.valueOf(myUserId))));
+
+            List<UserGroup> usergroups =
+                    userGroupRepository.findAll(Specifications.where(
+                            hasUserId(Integer.parseInt(id))));
+
+            //keep unknown groups as is
+            for(UserGroup ug : usergroups) {
+                if(!myUserAdminGroups.contains(ug.getGroup().getId())) {
+                    groups.add(new GroupElem(ug.getProfile().name(),
+                            ug.getGroup().getId()));
+                }
+            }
+        }
 
         User user = getUser(userRepository, operation, id, username);
 
@@ -471,6 +493,7 @@ public class Update {
     }
 }
 
+@Deprecated
 class GroupElem {
 
     private String profile;

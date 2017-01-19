@@ -44,9 +44,15 @@
           scope.facetQuery = scope.params['facet.q'];
           scope.facetConfig = null;
 
+          scope.fLvlCollapse = {};
           scope.collapseAll = function() {
-            $timeout(function() {
-              element.parent().find('div.gn-facet > h4').click();
+            angular.forEach(scope.fLvlCollapse, function(v, k) {
+              scope.fLvlCollapse[k] = true;
+            });
+          };
+          scope.expandAll = function() {
+            angular.forEach(scope.fLvlCollapse, function(v, k) {
+              scope.fLvlCollapse[k] = false;
             });
           };
 

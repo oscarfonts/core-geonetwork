@@ -39,6 +39,9 @@
   <logger name="geonetwork.database">
     <level value="WARN"/>
   </logger>
+  <logger name="geonetwork.cors">
+    <level value="WARN"/>
+  </logger>
   <logger name="geonetwork.editor">
     <level value="WARN"/>
   </logger>
@@ -218,7 +221,6 @@
     <appender-ref ref="consoleAppender"/>
     <appender-ref ref="fileAppender"/>
   </logger>
-
 
   <!-- Turn off logging except when explicitly declared below -->
   <root>

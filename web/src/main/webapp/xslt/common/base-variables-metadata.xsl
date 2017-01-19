@@ -50,6 +50,10 @@
     <saxon:call-template name="{concat('get-', $schema, '-is-service')}"/>
   </xsl:variable>
 
+  <xsl:variable name="metadataTitle">
+    <saxon:call-template name="{concat('get-', $schema, '-title')}"/>
+  </xsl:variable>
+
   <xsl:variable name="metadataLanguage">
     <saxon:call-template name="{concat('get-', $schema, '-language')}"/>
   </xsl:variable>
@@ -66,7 +70,6 @@
 
 
   <!-- The labels, codelists and profiles specific strings -->
-  <!-- TODO : label inheritance between profiles - maybe in Java ? -->
   <xsl:variable name="schemaInfo" select="/root/gui/schemas/*[name(.)=$schema]"/>
   <xsl:variable name="labels" select="$schemaInfo/labels"/>
   <xsl:variable name="codelists" select="$schemaInfo/codelists"/>
@@ -77,7 +80,10 @@
   <xsl:variable name="iso19139codelists" select="$iso19139schema/codelists"/>
   <xsl:variable name="iso19139strings" select="$iso19139schema/strings"/>
 
-  <xsl:variable name="isEditing" select="$service = 'md.edit' or $service = 'md.element.add'"/>
+  <xsl:variable name="isEditing"
+                select="$service = 'md.edit'
+                or $service = 'embedded'
+                or $service = 'md.element.add'"/>
 
   <!-- Display attributes in editor -->
   <xsl:variable name="isDisplayingAttributes" select="/root/request/displayAttributes = 'true'"/>

@@ -40,11 +40,14 @@
         '$q',
         '$injector',
         'gnGlobalSettings',
-        function($q, $injector, gnGlobalSettings) {
+        'gnLangs',
+        function($q, $injector, gnGlobalSettings, gnLangs) {
           return {
             request: function(config) {
-
-              if (config.url.startsWith('http')) {
+              if (gnLangs.current) {
+                config.headers['Accept-Language'] = gnLangs.current;
+              }
+              if (config.url.indexOf('http', 0) === 0) {
                 var url = config.url.split('/');
                 url = url[0] + '/' + url[1] + '/' + url[2] + '/';
 
@@ -66,7 +69,7 @@
               } else if (!config.status || config.status == -1) {
                 var defer = $q.defer();
 
-                if (config.url.startsWith('http')) {
+                if (config.url.indexOf('http', 0) === 0) {
                   var url = config.url.split('/');
                   url = url[0] + '/' + url[1] + '/' + url[2] + '/';
 
@@ -74,9 +77,10 @@
                     gnGlobalSettings.requireProxy.push(url);
                   }
 
-                  $injector.invoke(function($http) {
+                  $injector.invoke(['$http', function($http) {
                     // This modification prevents interception (infinite
                     // loop):
+
                     config.nointercept = true;
 
                     // retry again
@@ -85,13 +89,15 @@
                     }, function(resp) {
                       defer.reject(resp);
                     });
-                  });
+                  }]);
 
                 } else {
-                  defer.resolve(response);
+                  return $q.reject(response);
                 }
 
                 return defer.promise;
+              } else {
+                return response;
               }
             }
           };

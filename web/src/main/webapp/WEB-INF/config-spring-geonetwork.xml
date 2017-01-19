@@ -26,10 +26,17 @@
        xmlns:util="http://www.springframework.org/schema/util"
        default-lazy-init="true"
        xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 ">
+  <context:annotation-config/>
+
+  <context:property-placeholder location="WEB-INF/config.properties"
+                                file-encoding="UTF-8"
+                                ignore-unresolvable="true" />
 
   <import resource="config-spring-env.xml"/>
   <import resource="config-security/config-security.xml"/>
@@ -44,6 +51,11 @@
   <!-- Import the versioning configuration (subversion etc...) -->
   <import resource="config-versioning.xml"/>
 
+  <bean name="statusActionFactory"
+        class="org.fao.geonet.kernel.metadata.StatusActionsFactory">
+    <constructor-arg name="className" value="org.fao.geonet.kernel.metadata.DefaultStatusActions"/>
+  </bean>
+
 
   <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
@@ -56,9 +68,11 @@
     <property name="numberOfConcurrentRequests" value="30"/>
   </bean>
 
-  <bean id="defaultLanguage" class="java.lang.String">
-    <constructor-arg index="0" value="eng"/>
+  <bean id="language" class="org.fao.geonet.web.DefaultLanguage">
+    <property name="language" value="${language.default}"/>
+    <property name="forceDefault" value="${language.forceDefault}"/>
   </bean>
+
   <!-- Define the languages in the UI. Seems like these should come from database
     at some point but at the moment they are needed here. -->
   <util:set id="languages" value-type="java.lang.String">
@@ -78,7 +92,6 @@
     <value>spa</value>
     <value>tur</value>
   </util:set>
-
 
   <util:map id="jpaPropertyMap">
     <entry key="shared-cache-mode" value="ENABLE_SELECTIVE"/>
