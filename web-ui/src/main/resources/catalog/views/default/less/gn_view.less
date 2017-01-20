@@ -1,3 +1,99 @@
 /* Defined here any custom style for the view
    which has to be applied for all apps
    (ie. admin, search, login, editor). */
+
+/* Add icons for custom categories */
+@import "../../../lib/style/font-awesome/less/variables";
+
+.gn-icon-maps:before { content: @fa-var-map-o }
+.gn-icon-satellite:before { content: @fa-var-globe }
+.gn-icon-lidar:before { content: @fa-var-ellipsis-h }
+.gn-icon-vector:before { content: @fa-var-pencil-square-o }
+.gn-icon-sensor:before { content: @fa-var-tachometer }
+.gn-icon-services:before { content: @fa-var-cloud }
+
+
+/* Enable category editing */
+.dropdown-menu {
+  li.disabled {
+    a {
+      pointer-events: auto;
+    }
+  }
+}
+
+
+/* Define HAII style variables */
+@haii-primary:        #083F85;
+@haii-complement:     #E8E4DD;
+@haii-primary-top:    #122640;
+@haii-complement-top: #FF9E00;
+@import url('https://fonts.googleapis.com/css?family=Kanit');
+@headings-font: "Kanit", sans-serif;
+@font:          "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+/* General fonts and colors */
+html, body {
+  font-family: @font;
+}
+
+body {
+	font-family: @font;
+	background-color: @haii-complement;
+}
+
+h1, h2, h3, h4, h5, h6, h7, h8, h9, h10 {
+    font-family: @headings-font !important;
+}
+
+
+/* Header fonts and colors */
+.navbar,
+.navbar-collapse {
+	background: @haii-primary-top;
+	color: @haii-complement-top;
+}
+
+.navbar-nav > li > a {
+  font-family: @font;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: @haii-complement-top;
+}
+
+.navbar-default .navbar-nav > li > a {
+  font-weight: bold;
+  color: @haii-complement;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+}
+
+
+/* Add a white backround to certain elements */
+.gn-search-facet,
+.gn-info-list,
+.gn-results-editor,
+.gn-record,
+.gn-md-side,
+.gn-editor {
+  background-color: #fff;
+}
+
+/* Hide useless big block on main page */
+.gn-row-main .well {
+    display: none;
+}
+
+/* Fix bug on result view (3-line titles) */
+ul.gn-resultview li.gn-grid .gn-md-title {
+  max-height: none;
+}
