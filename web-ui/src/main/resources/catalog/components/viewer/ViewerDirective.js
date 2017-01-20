@@ -78,7 +78,7 @@
 
               // By default, synch only background layer
               // between main map and search map
-              scope.synAllLayers = false;
+              scope.synAllLayers = true;
 
               scope.map.getLayers().on('add', function() {
                 if (angular.isDefined(gnSearchSettings.searchMap))
