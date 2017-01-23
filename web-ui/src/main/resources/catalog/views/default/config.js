@@ -110,6 +110,13 @@
 
           var viewerMap = new ol.Map({
             controls: [],
+            layers: [
+              new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                  url: "http://live1.haii.or.th/geoserver/gwc/service/tms/icgc:province_dopa@EPSG:900913@png8/{z}/{x}/{-y}.png"
+                })
+              })
+            ],
             view: new ol.View(mapsConfig)
           });
 
