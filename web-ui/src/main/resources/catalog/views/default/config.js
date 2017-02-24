@@ -51,6 +51,9 @@
             gnMap.createLayerForType('osm')
           ];
 
+          viewerSettings.bingKey = 'AnElW2Zqi4fI-9cYx1LHiQfokQ9GrNzcjOh_' +
+              'p_0hkO1yo78ba8zTLARcLBIf8H6D';
+
           viewerSettings.servicesUrl =
             viewerSettings.mapConfig.listOfServices || {};
 
@@ -113,7 +116,7 @@
             layers: [
               new ol.layer.Tile({
                 source: new ol.source.XYZ({
-                  url: "http://live1.haii.or.th/geoserver/gwc/service/tms/icgc:province_dopa@EPSG:900913@png8/{z}/{x}/{-y}.png"
+                  url: "http://geoportal.haii.or.th/geoserver/gwc/service/tms/1.0.0/icgc:amphoe_dopa@EPSG:900913@png8/{z}/{x}/{-y}.png"
                 })
               })
             ],
