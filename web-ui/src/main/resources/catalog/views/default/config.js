@@ -113,13 +113,7 @@
 
           var viewerMap = new ol.Map({
             controls: [],
-            layers: [
-              new ol.layer.Tile({
-                source: new ol.source.XYZ({
-                  url: "http://geoportal.haii.or.th/geoserver/gwc/service/tms/1.0.0/icgc:amphoe_dopa@EPSG:900913@png8/{z}/{x}/{-y}.png"
-                })
-              })
-            ],
+            layers: [],
             view: new ol.View(mapsConfig)
           });
 
